@@ -63,10 +63,31 @@ PowerShell class >> isAvailable [
 	self shouldBeImplemented.
 ]
 
+{ #category : #testing }
+PowerShell class >> isInstalled [
+	Smalltalk os isUbuntu 
+		ifTrue: [ ^(LibC resultOfCommand: 'pwsh -v') includesSubstring: 'PowerShell' ].
+
+	"Need to be implemented for other platforms"
+	self shouldBeImplemented 
+
+]
+
+{ #category : #accessing }
+PowerShell class >> majorVersion [
+	^(self version substrings: { $. }) first
+]
+
 { #category : #'private - utilities' }
 PowerShell class >> runGnomeTerminalCommand: terminalCommandString [  
 	|cmd|
 	cmd := 'gnome-terminal --working-directory={1} --title="Installing Powershell" -x bash -c "{2}"'
 				format: { FileSystem workingDirectory fullName. terminalCommandString}.
 	LibC system: cmd		 
+]
+
+{ #category : #accessing }
+PowerShell class >> version [
+
+	 ^(LibC resultOfCommand: 'pwsh -v') substrings second
 ]

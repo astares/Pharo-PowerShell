@@ -15,6 +15,12 @@ Class {
 	#category : #'PowerShell-Core-Base'
 }
 
+{ #category : #examples }
+PowerShell class >> example [
+
+	(LibC resultOfCommand: 'pwsh -Command "Get-PSRepository | select-object * | ConvertTo-JSON"') inspect
+]
+
 { #category : #'private - installation' }
 PowerShell class >> installOnOutdatedUbuntuLinux [	
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"

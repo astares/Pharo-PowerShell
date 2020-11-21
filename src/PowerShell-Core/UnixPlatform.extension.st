@@ -1,6 +1,13 @@
 Extension { #name : #UnixPlatform }
 
 { #category : #'*PowerShell-Core' }
+UnixPlatform >> isDebian [
+	"Return true if the receiver is Debian"
+	
+	^self isLinuxDistributionWithName: 'Debian'
+]
+
+{ #category : #'*PowerShell-Core' }
 UnixPlatform >> isFedora [
 	"Return true if the receiver is Fedora"
 	

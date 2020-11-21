@@ -21,6 +21,25 @@ PowerShell class >> example [
 	(LibC resultOfCommand: 'pwsh -Command "Get-PSRepository | select-object * | ConvertTo-JSON"') inspect
 ]
 
+{ #category : #installation }
+PowerShell class >> installOnDebian [
+	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
+	<script>
+
+	|termCmd|
+		
+	termCmd := PSCommandChainer new
+					addCommand: 'sudo apt install snapd';				
+					addCommand: 'snap install powershell --classic';				
+					addCommand: 'bash';
+					combinedCommand.				
+	self runGnomeTerminalCommand: termCmd  					
+		 
+				
+								
+				
+]
+
 { #category : #'private - installation' }
 PowerShell class >> installOnOutdatedUbuntuLinux [	
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
@@ -31,6 +50,7 @@ PowerShell class >> installOnOutdatedUbuntuLinux [
 				addCommand: 'wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb';
 				addCommand: 'sudo dpkg -i packages-microsoft-prod.deb';
 				addCommand: 'sudo apt-get update';
+				addCommand: 'sudo apt-get install software-properties-common'; "necessary to have add-apt-repository"
 				addCommand: 'sudo add-apt-repository universe';
 				addCommand: 'bash';
 				addCommand: 'sudo apt-get install -y powershell';

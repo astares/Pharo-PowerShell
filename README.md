@@ -7,7 +7,7 @@ Access to Powershell from Pharo
 
 ```Smalltalk
   Metacello new
-      baseline:'CodeFonts';
+      baseline:'Powershell';
       repository: 'github://astares/Pharo-Powershell:main/src';
       load
 ```

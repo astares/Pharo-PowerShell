@@ -7,5 +7,5 @@ Class {
 { #category : #tests }
 PowerShellTest >> testIsAvailable [
 
-	self assert: PowerShell isAvailable 
+	self assert: PowerShell isAvailable
 ]

@@ -8,9 +8,9 @@ Class {
 PSCommandChainerTest >> testChainingCommands [
    |chainer|
 	chainer := PSCommandChainer new.
-	chainer 
+	chainer
 		addCommand: 'foo';
 		addCommand: 'bar'.
-		
+
 	self assert: chainer combinedCommand equals: 'foo; bar'
 ]

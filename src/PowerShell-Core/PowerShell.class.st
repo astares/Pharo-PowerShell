@@ -27,24 +27,20 @@ PowerShell class >> installOnDebian [
 	<script>
 
 	|termCmd|
-		
+
 	termCmd := PSCommandChainer new
-					addCommand: 'sudo apt install snapd';				
-					addCommand: 'snap install powershell --classic';				
+					addCommand: 'sudo apt install snapd';
+					addCommand: 'snap install powershell --classic';
 					addCommand: 'bash';
-					combinedCommand.				
-	self runGnomeTerminalCommand: termCmd  					
-		 
-				
-								
-				
+					combinedCommand.
+	self runGnomeTerminalCommand: termCmd
 ]
 
 { #category : #'private - installation' }
-PowerShell class >> installOnOutdatedUbuntuLinux [	
+PowerShell class >> installOnOutdatedUbuntuLinux [
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
 	<script>
-	
+
 	|termCmd|
 	termCmd := PSCommandChainer new
 				addCommand: 'wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb';
@@ -56,47 +52,39 @@ PowerShell class >> installOnOutdatedUbuntuLinux [
 				addCommand: 'sudo apt-get install -y powershell';
 				addCommand: 'pwsh';
 				addCommand: 'bash';
-				combinedCommand.				
-	self runGnomeTerminalCommand: termCmd  				
-				
-								
-				
+				combinedCommand.
+	self runGnomeTerminalCommand: termCmd
 ]
 
 { #category : #installation }
-PowerShell class >> installOnUbuntuLinux [	
+PowerShell class >> installOnUbuntuLinux [
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
 	<script>
 
 	|termCmd|
-		
+
 	(Smalltalk os linuxDistributionReleaseVersion asNumber < 20)
 		ifTrue: [ ^self installOnOutdatedUbuntuLinux ].
-		
+
 	termCmd := PSCommandChainer new
-					addCommand: 'snap install powershell --classic';				
+					addCommand: 'snap install powershell --classic';
 					addCommand: 'bash';
-					combinedCommand.				
-	self runGnomeTerminalCommand: termCmd  					
-		 
-				
-								
-				
+					combinedCommand.
+	self runGnomeTerminalCommand: termCmd
 ]
 
 { #category : #testing }
 PowerShell class >> isAvailable [
-	self shouldBeImplemented.
+	self shouldBeImplemented
 ]
 
 { #category : #testing }
 PowerShell class >> isInstalled [
-	Smalltalk os isUbuntu 
+	Smalltalk os isUbuntu
 		ifTrue: [ ^(LibC resultOfCommand: 'pwsh -v') includesSubstring: 'PowerShell' ].
 
 	"Need to be implemented for other platforms"
-	self shouldBeImplemented 
-
+	self shouldBeImplemented
 ]
 
 { #category : #accessing }
@@ -105,11 +93,11 @@ PowerShell class >> majorVersion [
 ]
 
 { #category : #'private - utilities' }
-PowerShell class >> runGnomeTerminalCommand: terminalCommandString [  
+PowerShell class >> runGnomeTerminalCommand: terminalCommandString [
 	|cmd|
 	cmd := 'gnome-terminal --working-directory={1} --title="Installing Powershell" -x bash -c "{2}"'
 				format: { FileSystem workingDirectory fullName. terminalCommandString}.
-	LibC system: cmd		 
+	LibC system: cmd
 ]
 
 { #category : #accessing }

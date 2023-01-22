@@ -15,21 +15,21 @@ Class {
 { #category : #operating }
 PSCommandChainer >> addCommand: aSingleCommand [
 	"Add a given command string to the collection of commands to combine"
-	
-	commands add: aSingleCommand 
+
+	commands add: aSingleCommand
 ]
 
 { #category : #accessing }
 PSCommandChainer >> combinedCommand [
 	"Combine the commands and separate them via '; ' "
-	
+
 	^String streamContents: [:s |
 		commands do: [:each | s nextPutAll: each ] separatedBy: [ s nextPutAll: '; ' ]
 	]
 ]
 
 { #category : #initialization }
-PSCommandChainer >> initialize [ 
+PSCommandChainer >> initialize [
 	super initialize.
 	commands := OrderedCollection new
 ]

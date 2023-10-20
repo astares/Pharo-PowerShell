@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #tests }
+PowerShellTest >> testAllInstalledModules [
+
+	self assert: PowerShell allInstalledModules notEmpty
+]
+
+{ #category : #tests }
 PowerShellTest >> testIsAvailable [
 
 	self assert: PowerShell isAvailable

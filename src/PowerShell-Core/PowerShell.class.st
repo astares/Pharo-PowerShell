@@ -23,6 +23,14 @@ PowerShell class >> allInstalledModules [
 	^ (STON fromString: modules) collect: [:each | PSModule fromDictionary: each ]
 ]
 
+{ #category : #'accessing - runtime' }
+PowerShell class >> edition [
+	"Return the edition of PowerShell runtime"
+	<script: 'self edition inspect'>
+	
+	^ self runCommand: '$PSEdition' 
+]
+
 { #category : #examples }
 PowerShell class >> example [
 

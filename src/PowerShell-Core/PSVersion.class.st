@@ -41,6 +41,18 @@ PSVersion >> build: anObject [
 	build := anObject
 ]
 
+{ #category : #initialization }
+PSVersion >> initialize [
+
+	super initialize.
+	major := 0.
+	minor := 0.
+	build := 0.
+	revision := 0.
+	majorRevision := 0.
+	minorRevision := 0.
+]
+
 { #category : #accessing }
 PSVersion >> major [
 

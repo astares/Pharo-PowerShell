@@ -2,17 +2,19 @@
 A class to represent PowerShell modules
 "
 Class {
-	#name : #PSModule,
-	#superclass : #PSObject,
+	#name : 'PSModule',
+	#superclass : 'PSObject',
 	#instVars : [
 		'name',
 		'version',
 		'description'
 	],
-	#category : #'PowerShell-Core-Model'
+	#category : 'PowerShell-Core-Model',
+	#package : 'PowerShell-Core',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PSModule class >> fromDictionary: aDictionary [ 
 	
 	| module |
@@ -23,43 +25,43 @@ PSModule class >> fromDictionary: aDictionary [
 	^ module
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> description [
 
 	^ description
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> description: anObject [
 
 	description := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PSModule >> printOn: aStream [
 
 	aStream nextPutAll: self name asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> version [
 
 	^ version
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> version: anObject [
 
 	version := anObject

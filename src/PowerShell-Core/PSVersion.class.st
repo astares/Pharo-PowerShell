@@ -2,8 +2,8 @@
 This class reflects a PowerShell version
 "
 Class {
-	#name : #PSVersion,
-	#superclass : #PSObject,
+	#name : 'PSVersion',
+	#superclass : 'PSObject',
 	#instVars : [
 		'major',
 		'minor',
@@ -12,10 +12,12 @@ Class {
 		'majorRevision',
 		'minorRevision'
 	],
-	#category : #'PowerShell-Core-Model'
+	#category : 'PowerShell-Core-Model',
+	#package : 'PowerShell-Core',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PSVersion class >> fromDictionary: aDictionary [ 
 	
 	| version |
@@ -29,19 +31,19 @@ PSVersion class >> fromDictionary: aDictionary [
 	^ version
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> build [
 
 	^ build
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> build: anObject [
 
 	build := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PSVersion >> initialize [
 
 	super initialize.
@@ -53,55 +55,55 @@ PSVersion >> initialize [
 	minorRevision := 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> major [
 
 	^ major
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> major: anObject [
 
 	major := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> majorRevision [
 
 	^ majorRevision
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> majorRevision: anObject [
 
 	majorRevision := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> minor [
 
 	^ minor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> minor: anObject [
 
 	minor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> minorRevision [
 
 	^ minorRevision
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> minorRevision: anObject [
 
 	minorRevision := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PSVersion >> printOn: aStream [
 
 	^ aStream 
@@ -114,13 +116,13 @@ PSVersion >> printOn: aStream [
 		nextPutAll: self revision asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> revision [
 
 	^ revision
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSVersion >> revision: anObject [
 
 	revision := anObject

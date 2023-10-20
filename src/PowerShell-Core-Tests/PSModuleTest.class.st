@@ -2,24 +2,22 @@
 A PSModuleTest is a test class for testing the behavior of PSModule
 "
 Class {
-	#name : 'PSModuleTest',
-	#superclass : 'TestCase',
+	#name : #PSModuleTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'module'
 	],
-	#category : 'PowerShell-Core-Tests-Model',
-	#package : 'PowerShell-Core-Tests',
-	#tag : 'Model'
+	#category : #'PowerShell-Core-Tests-Model'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 PSModuleTest >> setUp [
 
 	super setUp.
 	module := PSModule new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 PSModuleTest >> testIsBinary [
 
 	module moduleType: 1.
@@ -27,7 +25,7 @@ PSModuleTest >> testIsBinary [
 	self assert: module isBinary
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 PSModuleTest >> testIsManifest [
 
 	module moduleType: 2.
@@ -35,7 +33,7 @@ PSModuleTest >> testIsManifest [
 	self assert: module isManifest
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 PSModuleTest >> testIsScript [
 
 	module moduleType: 0.
@@ -43,13 +41,17 @@ PSModuleTest >> testIsScript [
 	self assert: module isScript
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 PSModuleTest >> testPackageManagementAvailable [
 
-	self assert: PSModule packageManagement notNil
+	| pmModule |
+	pmModule := PSModule packageManagement.	
+	self assert: pmModule notNil.
+	self assert: pmModule	notNil.
+	self assert: pmModule isBinary		
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 PSModuleTest >> testPowerShellName [
 
 	self assert: PSModule powerShellName equals: 'Module'

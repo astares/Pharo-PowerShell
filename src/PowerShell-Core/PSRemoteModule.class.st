@@ -2,8 +2,8 @@
 A remote module from a remote repository
 "
 Class {
-	#name : 'PSRemoteModule',
-	#superclass : 'PSNamedObject',
+	#name : #PSRemoteModule,
+	#superclass : #PSNamedObject,
 	#instVars : [
 		'version',
 		'type',
@@ -18,79 +18,77 @@ Class {
 		'projectUri',
 		'iconUri'
 	],
-	#category : 'PowerShell-Core-Model',
-	#package : 'PowerShell-Core',
-	#tag : 'Model'
+	#category : #'PowerShell-Core-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #'accessing - runtime' }
 PSRemoteModule class >> powershellNamedQueryTemplate [
 	"Returns the powershell template to query an instance by name"
 
 	^'Find-Module -Repository PSGallery -Name ''{1}'' | select-object * | ConvertTo-JSON'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> author [
 
 	^ author
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> author: anObject [
 
 	author := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> companyName [
 
 	^ companyName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> companyName: anObject [
 
 	companyName := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> copyright [
 
 	^ copyright
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> copyright: anObject [
 
 	copyright := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> description [
 
 	^ description
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> description: anObject [
 
 	description := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> iconUri [
 
 	^ iconUri
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> iconUri: anObject [
 
 	iconUri := anObject
 ]
 
-{ #category : 'private - initialization' }
+{ #category : #'private - initialization' }
 PSRemoteModule >> initFromDictionary: aDictionary [
 	"Initializes the receiver from the given dictionary"
 
@@ -110,85 +108,85 @@ PSRemoteModule >> initFromDictionary: aDictionary [
 		iconUri: 	(aDictionary at: #IconUri ifAbsent: '')
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> installedDate [
 
 	^ installedDate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> installedDate: anObject [
 
 	installedDate := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> licenseUri [
 
 	^ licenseUri
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> licenseUri: anObject [
 
 	licenseUri := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> projectUri [
 
 	^ projectUri
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> projectUri: anObject [
 
 	projectUri := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> publishedDate [
 
 	^ publishedDate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> publishedDate: anObject [
 
 	publishedDate := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> type [
 
 	^ type
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> type: anObject [
 
 	type := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> updatedDate [
 
 	^ updatedDate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> updatedDate: anObject [
 
 	updatedDate := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> version [
 
 	^ version
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRemoteModule >> version: anObject [
 
 	version := anObject

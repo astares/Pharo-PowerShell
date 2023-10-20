@@ -11,6 +11,15 @@ PowerShellTest >> testAllInstalledModules [
 ]
 
 { #category : #tests }
+PowerShellTest >> testEdition [
+
+	| editions |
+	editions := #('Core' 'Desktop').
+	self assert: (editions includes: PowerShell edition)
+
+]
+
+{ #category : #tests }
 PowerShellTest >> testIsAvailable [
 
 	self assert: PowerShell isAvailable

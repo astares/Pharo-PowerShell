@@ -28,7 +28,7 @@ PowerShell class >> edition [
 	"Return the edition of PowerShell runtime"
 	<script: 'self edition inspect'>
 	
-	^ self runCommand: '$PSEdition' 
+	^ (self runCommand: '$PSEdition') trimBoth
 ]
 
 { #category : #examples }

@@ -2,19 +2,17 @@
 The PowerShell module type
 "
 Class {
-	#name : 'PSModuleType',
-	#superclass : 'SharedPool',
+	#name : #PSModuleType,
+	#superclass : #SharedPool,
 	#classVars : [
 		'Binary',
 		'Manifest',
 		'Script'
 	],
-	#category : 'PowerShell-Core-Model',
-	#package : 'PowerShell-Core',
-	#tag : 'Model'
+	#category : 'PowerShell-Core-Model'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 PSModuleType class >> initialize [
 	Script := 0.
 	Binary := 1.

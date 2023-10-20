@@ -4,24 +4,22 @@
 A command chainer is chaining a few shell commands into a common combined command.
 "
 Class {
-	#name : 'PSCommandChainer',
-	#superclass : 'Object',
+	#name : #PSCommandChainer,
+	#superclass : #Object,
 	#instVars : [
 		'commands'
 	],
-	#category : 'PowerShell-Core-Utilities',
-	#package : 'PowerShell-Core',
-	#tag : 'Utilities'
+	#category : 'PowerShell-Core-Utilities'
 }
 
-{ #category : 'operating' }
+{ #category : #operating }
 PSCommandChainer >> addCommand: aSingleCommand [
 	"Add a given command string to the collection of commands to combine"
 
 	commands add: aSingleCommand
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSCommandChainer >> combinedCommand [
 	"Combine the commands and separate them via '; ' "
 
@@ -30,7 +28,7 @@ PSCommandChainer >> combinedCommand [
 	]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 PSCommandChainer >> initialize [
 	super initialize.
 	commands := OrderedCollection new

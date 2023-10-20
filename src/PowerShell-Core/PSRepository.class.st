@@ -2,8 +2,8 @@
 A PowerShell repository
 "
 Class {
-	#name : 'PSRepository',
-	#superclass : 'PSNamedObject',
+	#name : #PSRepository,
+	#superclass : #PSNamedObject,
 	#instVars : [
 		'sourceLocation',
 		'trusted',
@@ -14,12 +14,10 @@ Class {
 		'scriptSourceLocation',
 		'scriptPublishLocation'
 	],
-	#category : 'PowerShell-Core-Model',
-	#package : 'PowerShell-Core',
-	#tag : 'Model'
+	#category : 'PowerShell-Core-Model'
 }
 
-{ #category : 'private - initialization' }
+{ #category : #'private - initialization' }
 PSRepository >> initFromDictionary: aDictionary [
 	"Initializes the receiver from the given dictionary"
 
@@ -35,97 +33,97 @@ PSRepository >> initFromDictionary: aDictionary [
 		scriptPublishLocation: (aDictionary at: #ScriptPublishLocation ifAbsent: '')
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> installationPolicy [
 
 	^ installationPolicy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> installationPolicy: anObject [
 
 	installationPolicy := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> packageManagementProvider [
 
 	^ packageManagementProvider
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> packageManagementProvider: anObject [
 
 	packageManagementProvider := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> publishLocation [
 
 	^ publishLocation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> publishLocation: anObject [
 
 	publishLocation := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> registered [
 
 	^ registered
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> registered: anObject [
 
 	registered := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> scriptPublishLocation [
 
 	^ scriptPublishLocation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> scriptPublishLocation: anObject [
 
 	scriptPublishLocation := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> scriptSourceLocation [
 
 	^ scriptSourceLocation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> scriptSourceLocation: anObject [
 
 	scriptSourceLocation := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> sourceLocation [
 
 	^ sourceLocation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> sourceLocation: anObject [
 
 	sourceLocation := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> trusted [
 
 	^ trusted
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 PSRepository >> trusted: anObject [
 
 	trusted := anObject

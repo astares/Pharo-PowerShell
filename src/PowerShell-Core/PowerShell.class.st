@@ -10,30 +10,28 @@ Run
 to make sure the powershell is installed
 "
 Class {
-	#name : 'PowerShell',
-	#superclass : 'Object',
-	#category : 'PowerShell-Core-Base',
-	#package : 'PowerShell-Core',
-	#tag : 'Base'
+	#name : #PowerShell,
+	#superclass : #Object,
+	#category : #'PowerShell-Core-Base'
 }
 
-{ #category : 'accessing' }
-PowerShell class >> allInstalledModules [
+{ #category : #accessing }
+PowerShell class >> allInstalledModuleNames [
 
 	|modules|
-	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name | ConvertTo-JSON'.
-	^ (STON fromString: modules) collect: [:each | PSModule named: (each at: #Name) ]
+	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, ModuleType | ConvertTo-Json'.
+	^ (STON fromString: modules) collect: [:each | each at: #Name ]
 ]
 
-{ #category : 'accessing' }
-PowerShell class >> allInstalledModules2 [
+{ #category : #accessing }
+PowerShell class >> allInstalledModules [
 
 	|modules|
 	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, ModuleType | ConvertTo-Json'.
 	^ (STON fromString: modules) collect: [:each | PSModule fromDictionary: each ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 PowerShell class >> commandTemplate [
 
 	^ Smalltalk os isWindows 
@@ -41,7 +39,7 @@ PowerShell class >> commandTemplate [
 			ifFalse: [ '{1} -Command ''{2}''' ]
 ]
 
-{ #category : 'accessing - runtime' }
+{ #category : #'accessing - runtime' }
 PowerShell class >> edition [
 	"Return the edition of PowerShell runtime"
 	<script: 'self edition inspect'>
@@ -49,13 +47,13 @@ PowerShell class >> edition [
 	^ (self runCommand: '$PSEdition') trimBoth
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 PowerShell class >> example [
 
 	(LibC resultOfCommand: 'pwsh -Command "Get-PSRepository | select-object * | ConvertTo-JSON"') inspect
 ]
 
-{ #category : 'accessing - runtime' }
+{ #category : #'accessing - runtime' }
 PowerShell class >> executableName [
 	<script: 'self powershellExecutableName inspect'>
 	
@@ -64,7 +62,7 @@ PowerShell class >> executableName [
 			ifFalse:  [ 'pwsh' ]
 ]
 
-{ #category : 'accessing - runtime' }
+{ #category : #'accessing - runtime' }
 PowerShell class >> executablePath [
 	<script: 'self powershellExecutablePath inspect'>
 	
@@ -78,16 +76,18 @@ PowerShell class >> executablePath [
 	self shouldBeImplemented
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 PowerShell class >> getInstanceNamed: aName forClass: aClass [
 	"Instantiate a new Pharo instance from the PowerShell twin"
 
-	| json |
-	json := self runCommand: 'Get-',aClass powerShellName,' -Name ''',aName,''' | select-object * | ConvertTo-JSON'.
+	| psCmd json |
+	psCmd := aClass powershellNamedQueryTemplate format: (Array with: aName).
+	json := self runCommand: psCmd.
+	json ifEmpty: [ self error: 'Not able to instantiate by name' ].
 	^ aClass fromJSON: json
 ]
 
-{ #category : 'installation' }
+{ #category : #installation }
 PowerShell class >> installOnDebian [
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
 	<script>
@@ -102,7 +102,7 @@ PowerShell class >> installOnDebian [
 	self runGnomeTerminalCommand: termCmd
 ]
 
-{ #category : 'private - installation' }
+{ #category : #'private - installation' }
 PowerShell class >> installOnOutdatedUbuntuLinux [
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
 	<script>
@@ -122,7 +122,7 @@ PowerShell class >> installOnOutdatedUbuntuLinux [
 	self runGnomeTerminalCommand: termCmd
 ]
 
-{ #category : 'installation' }
+{ #category : #installation }
 PowerShell class >> installOnUbuntuLinux [
 	"See https://docs.microsoft.com/de-de/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7"
 	<script>
@@ -139,13 +139,13 @@ PowerShell class >> installOnUbuntuLinux [
 	self runGnomeTerminalCommand: termCmd
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 PowerShell class >> isAvailable [
 
 	^ self isInstalled 
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 PowerShell class >> isInstalled [
 
 	Smalltalk os isWindows 
@@ -158,7 +158,7 @@ PowerShell class >> isInstalled [
 	self shouldBeImplemented
 ]
 
-{ #category : 'accessing - runtime' }
+{ #category : #'accessing - runtime' }
 PowerShell class >> powershellExecutablePath [
 	<script: 'self powershellExecutablePath inspect'>
 	
@@ -172,13 +172,13 @@ PowerShell class >> powershellExecutablePath [
 	self shouldBeImplemented
 ]
 
-{ #category : 'utilities' }
+{ #category : #utilities }
 PowerShell class >> resultOfCommand: aCommand [
 
 	^ Smalltalk os resultOfCommand: aCommand 
 ]
 
-{ #category : 'utilities' }
+{ #category : #utilities }
 PowerShell class >> runCommand: aCommand [
 
 	| cmdLine |
@@ -186,7 +186,7 @@ PowerShell class >> runCommand: aCommand [
 	^ self resultOfCommand: cmdLine
 ]
 
-{ #category : 'private - utilities' }
+{ #category : #'private - utilities' }
 PowerShell class >> runGnomeTerminalCommand: terminalCommandString [
 	|cmd|
 	cmd := 'gnome-terminal --working-directory={1} --title="Installing Powershell" -x bash -c "{2}"'
@@ -194,7 +194,7 @@ PowerShell class >> runGnomeTerminalCommand: terminalCommandString [
 	LibC system: cmd
 ]
 
-{ #category : 'accessing - runtime' }
+{ #category : #'accessing - runtime' }
 PowerShell class >> version [
 	"Return the version of PowerShell runtime"
 	<script: 'self version inspect'>

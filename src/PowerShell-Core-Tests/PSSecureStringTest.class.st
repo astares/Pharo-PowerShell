@@ -11,6 +11,8 @@ Class {
 
 { #category : 'tests' }
 PSSecureStringTest >> testGetSecureString [
-
+	"Only run on Windows"
+	
+	Smalltalk os isWindows ifFalse: [ ^ self skip ]. 
 	self assert: (PSSecureString getSecureStringForPassword: 'mySecretPassword') size equals: 525
 ]

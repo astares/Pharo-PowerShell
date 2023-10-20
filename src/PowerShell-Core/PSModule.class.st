@@ -7,23 +7,13 @@ Class {
 	#instVars : [
 		'name',
 		'version',
-		'description'
+		'description',
+		'path'
 	],
 	#category : 'PowerShell-Core-Model',
 	#package : 'PowerShell-Core',
 	#tag : 'Model'
 }
-
-{ #category : 'instance creation' }
-PSModule class >> fromDictionary: aDictionary [ 
-	
-	| module |
-	module := self new.
-	module name: (aDictionary at: #Name ifAbsent: '').
-	module version: (PSVersion fromDictionary: (aDictionary at: #Version ifAbsent: Dictionary new)).	
-	module description: (aDictionary at: #Description ifAbsent: '').
-	^ module
-]
 
 { #category : 'accessing' }
 PSModule >> description [
@@ -37,6 +27,17 @@ PSModule >> description: anObject [
 	description := anObject
 ]
 
+{ #category : 'private - initialization' }
+PSModule >> initFromDictionary: aDictionary [
+	"Initializes the receiver from the given dictionary"
+
+	self
+		name: (aDictionary at: #Name ifAbsent: '');
+		version: (PSVersion fromDictionary: (aDictionary at: #Version ifAbsent: Dictionary new));
+		description: (aDictionary at: #Description ifAbsent: '');
+		path: (aDictionary at: #Path ifAbsent: '')
+]
+
 { #category : 'accessing' }
 PSModule >> name [
 
@@ -47,6 +48,18 @@ PSModule >> name [
 PSModule >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : 'accessing' }
+PSModule >> path [
+
+	^ path
+]
+
+{ #category : 'accessing' }
+PSModule >> path: anObject [
+
+	path := anObject
 ]
 
 { #category : 'printing' }

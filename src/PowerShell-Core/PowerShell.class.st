@@ -21,7 +21,7 @@ Class {
 PowerShell class >> allInstalledModules [
 
 	|modules|
-	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, ModuleType | ConvertTo-Json'.
+	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, Path, ModuleType | ConvertTo-Json'.
 	^ (STON fromString: modules) collect: [:each | PSModule fromDictionary: each ]
 ]
 

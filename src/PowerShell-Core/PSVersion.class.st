@@ -17,20 +17,6 @@ Class {
 	#tag : 'Model'
 }
 
-{ #category : 'instance creation' }
-PSVersion class >> fromDictionary: aDictionary [ 
-	
-	| version |
-	version := self new.
-	version major: (aDictionary at: #Major ifAbsent: 0).
-	version minor: (aDictionary at: #Minor ifAbsent: 0).
-	version build: (aDictionary at: #Build ifAbsent: 0).
-	version revision: (aDictionary at: #Revision ifAbsent: 0).
-	version majorRevision: (aDictionary at: #MajorRevision ifAbsent: 0).				
-	version minorRevision: (aDictionary at: #MinorRevision ifAbsent: 0).									
-	^ version
-]
-
 { #category : 'accessing' }
 PSVersion >> build [
 
@@ -41,6 +27,19 @@ PSVersion >> build [
 PSVersion >> build: anObject [
 
 	build := anObject
+]
+
+{ #category : 'private - initialization' }
+PSVersion >> initFromDictionary: aDictionary [
+	"Initializes the receiver from the given dictionary"
+
+	self
+		major: (aDictionary at: #Major ifAbsent: 0);
+		minor: (aDictionary at: #Minor ifAbsent: 0);
+		build: (aDictionary at: #Build ifAbsent: 0);
+		revision: (aDictionary at: #Revision ifAbsent: 0);
+		majorRevision: (aDictionary at: #MajorRevision ifAbsent: 0);
+		minorRevision: (aDictionary at: #MinorRevision ifAbsent: 0)
 ]
 
 { #category : 'initialization' }

@@ -1,10 +1,12 @@
 Class {
-	#name : #PSCommandChainerTest,
-	#superclass : #TestCase,
-	#category : #'PowerShell-Core-Tests-Utilities'
+	#name : 'PSCommandChainerTest',
+	#superclass : 'TestCase',
+	#category : 'PowerShell-Core-Tests-Utilities',
+	#package : 'PowerShell-Core-Tests',
+	#tag : 'Utilities'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSCommandChainerTest >> testChainingCommands [
    |chainer|
 	chainer := PSCommandChainer new.

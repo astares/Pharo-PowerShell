@@ -12,12 +12,14 @@ Class {
 { #category : 'instance creation' }
 PSObject class >> fromDictionary: aDictionary [
 
-	^ self subclassResponsibility 
+	^ self new
+		  initFromDictionary: aDictionary;
+		  yourself
 ]
 
 { #category : 'instance creation' }
-PSObject class >> fromJSON: aString [ 
-	
+PSObject class >> fromJSON: aString [
+
 	^ self fromDictionary: (STON fromString: aString)
 ]
 
@@ -25,4 +27,11 @@ PSObject class >> fromJSON: aString [
 PSObject class >> isAbstract [
 
 	^ self == PSObject
+]
+
+{ #category : 'private - initialization' }
+PSObject >> initFromDictionary: aDictionary [
+	"Initializes the receiver from the given dictionary"
+
+	self subclassResponsibility
 ]

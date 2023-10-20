@@ -15,6 +15,14 @@ Class {
 	#category : #'PowerShell-Core-Base'
 }
 
+{ #category : #accessing }
+PowerShell class >> allInstalledModules [
+
+	|modules|
+	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, ModuleType | ConvertTo-Json'.
+	^ (STON fromString: modules) collect: [:each | PSModule fromDictionary: each ]
+]
+
 { #category : #examples }
 PowerShell class >> example [
 
@@ -87,9 +95,16 @@ PowerShell class >> isInstalled [
 	self shouldBeImplemented
 ]
 
-{ #category : #accessing }
-PowerShell class >> majorVersion [
-	^(self version substrings: { $. }) first
+{ #category : #utilities }
+PowerShell class >> resultOfCommand: aCommand [
+
+	^ Smalltalk os resultOfCommand: aCommand 
+]
+
+{ #category : #utilities }
+PowerShell class >> runCommand: aCommand [
+
+	^ self resultOfCommand: 'powershell "', aCommand, '"' 
 ]
 
 { #category : #'private - utilities' }
@@ -102,6 +117,8 @@ PowerShell class >> runGnomeTerminalCommand: terminalCommandString [
 
 { #category : #accessing }
 PowerShell class >> version [
-
-	 ^(LibC resultOfCommand: 'pwsh -v') substrings second
+	
+	| jsonString |
+	jsonString := self runCommand: '$PSVersionTable.PSVersion | ConvertTo-Json'.
+	^ PSVersion fromJSON: jsonString
 ]

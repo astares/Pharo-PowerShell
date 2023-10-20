@@ -21,7 +21,15 @@ Class {
 PowerShell class >> allInstalledModules [
 
 	|modules|
-	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, Path, ModuleType | ConvertTo-Json'.
+	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name | ConvertTo-JSON'.
+	^ (STON fromString: modules) collect: [:each | PSModule named: (each at: #Name) ]
+]
+
+{ #category : 'accessing' }
+PowerShell class >> allInstalledModules2 [
+
+	|modules|
+	modules := self runCommand: 'Get-Module -ListAvailable | Select-Object Name, Version, Description, ModuleType | ConvertTo-Json'.
 	^ (STON fromString: modules) collect: [:each | PSModule fromDictionary: each ]
 ]
 
@@ -68,6 +76,15 @@ PowerShell class >> executablePath [
 
 	"Need to be implemented for other platforms"
 	self shouldBeImplemented
+]
+
+{ #category : 'factory' }
+PowerShell class >> getInstanceNamed: aName forClass: aClass [
+	"Instantiate a new Pharo instance from the PowerShell twin"
+
+	| json |
+	json := self runCommand: 'Get-',aClass powerShellName,' -Name ''',aName,''' | select-object * | ConvertTo-JSON'.
+	^ aClass fromJSON: json
 ]
 
 { #category : 'installation' }

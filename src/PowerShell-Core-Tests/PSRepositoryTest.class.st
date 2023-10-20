@@ -50,3 +50,9 @@ PSRepositoryTest >> testFromJSONString [
 		assert: repository scriptSourceLocation equals: 'https://www.powershellgallery.com/api/v2/items/psscript';
 		assert: repository scriptPublishLocation equals: 'https://www.powershellgallery.com/api/v2/package/'
 ]
+
+{ #category : 'tests' }
+PSRepositoryTest >> testPowerShellName [
+
+	self assert: PSRepository powerShellName equals: 'PSRepository'
+]

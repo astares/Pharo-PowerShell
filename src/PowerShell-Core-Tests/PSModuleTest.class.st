@@ -8,3 +8,9 @@ Class {
 	#package : 'PowerShell-Core-Tests',
 	#tag : 'Model'
 }
+
+{ #category : 'tests' }
+PSModuleTest >> testPowerShellName [
+
+	self assert: PSModule powerShellName equals: 'Module'
+]

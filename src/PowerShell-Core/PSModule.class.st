@@ -3,9 +3,8 @@ A class to represent PowerShell modules
 "
 Class {
 	#name : 'PSModule',
-	#superclass : 'PSObject',
+	#superclass : 'PSNamedObject',
 	#instVars : [
-		'name',
 		'version',
 		'description',
 		'path'
@@ -14,6 +13,12 @@ Class {
 	#package : 'PowerShell-Core',
 	#tag : 'Model'
 }
+
+{ #category : 'accessing' }
+PSModule class >> powerShellName [
+
+	^ 'Module'
+]
 
 { #category : 'accessing' }
 PSModule >> description [
@@ -36,18 +41,6 @@ PSModule >> initFromDictionary: aDictionary [
 		version: (PSVersion fromDictionary: (aDictionary at: #Version ifAbsent: Dictionary new));
 		description: (aDictionary at: #Description ifAbsent: '');
 		path: (aDictionary at: #Path ifAbsent: '')
-]
-
-{ #category : 'accessing' }
-PSModule >> name [
-
-	^ name
-]
-
-{ #category : 'accessing' }
-PSModule >> name: anObject [
-
-	name := anObject
 ]
 
 { #category : 'accessing' }

@@ -3,9 +3,8 @@ A PowerShell repository
 "
 Class {
 	#name : 'PSRepository',
-	#superclass : 'PSObject',
+	#superclass : 'PSNamedObject',
 	#instVars : [
-		'name',
 		'sourceLocation',
 		'trusted',
 		'registered',
@@ -46,18 +45,6 @@ PSRepository >> installationPolicy [
 PSRepository >> installationPolicy: anObject [
 
 	installationPolicy := anObject
-]
-
-{ #category : 'accessing' }
-PSRepository >> name [
-
-	^ name
-]
-
-{ #category : 'accessing' }
-PSRepository >> name: anObject [
-
-	name := anObject
 ]
 
 { #category : 'accessing' }

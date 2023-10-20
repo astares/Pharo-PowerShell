@@ -8,7 +8,7 @@ Access to Powershell from Pharo
 
 ```Smalltalk
   Metacello new
-      baseline:'Powershell';
+      baseline:'PowerShell';
       repository: 'github://astares/Pharo-Powershell:main/src';
       load
 ```

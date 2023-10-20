@@ -2,15 +2,17 @@
 A PSVersionTest is a test class for testing the behavior of PSVersion
 "
 Class {
-	#name : #PSVersionTest,
-	#superclass : #TestCase,
+	#name : 'PSVersionTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'version'
 	],
-	#category : 'PowerShell-Core-Tests-Model'
+	#category : 'PowerShell-Core-Tests-Model',
+	#package : 'PowerShell-Core-Tests',
+	#tag : 'Model'
 }
 
-{ #category : #data }
+{ #category : 'data' }
 PSVersionTest >> sampleJSONString [
 
 	^'{
@@ -23,14 +25,14 @@ PSVersionTest >> sampleJSONString [
 	}'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 PSVersionTest >> setUp [
 
 	super setUp.
 	version := PSVersion fromJSON: self sampleJSONString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSVersionTest >> testFromJSONString [
 
 	self
@@ -42,7 +44,7 @@ PSVersionTest >> testFromJSONString [
 		assert: version minorRevision equals: 2428
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSVersionTest >> testInitialization [
 
 	|instance|
@@ -56,7 +58,7 @@ PSVersionTest >> testInitialization [
 		assert: instance minorRevision equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSVersionTest >> testPrintString [
 
 	self assert: version printString equals: '5.1.22621.2428'

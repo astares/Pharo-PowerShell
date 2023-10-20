@@ -2,8 +2,8 @@
 A class to represent PowerShell modules
 "
 Class {
-	#name : #PSModule,
-	#superclass : #PSNamedObject,
+	#name : 'PSModule',
+	#superclass : 'PSNamedObject',
 	#instVars : [
 		'version',
 		'description',
@@ -13,35 +13,46 @@ Class {
 	#pools : [
 		'PSModuleType'
 	],
-	#category : #'PowerShell-Core-Model'
+	#category : 'PowerShell-Core-Model',
+	#package : 'PowerShell-Core',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'examples' }
+PSModule class >> packageManagement [
+	<sampleInstance>
+
+	^ self named: 'PackageManagement'
+]
+
+{ #category : 'accessing' }
 PSModule class >> powerShellName [
 
 	^ 'Module'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule class >> powershellNamedQueryTemplate [
-	"Returns the powershell template to query an instance by name"
+	"Returns the powershell template to query an instance by name.
 
-	^'Get-',self powerShellName, ' -ListAvailable -Name ''{1}'' | select-object * | ConvertTo-JSON'
+	 If you want all choose select-object *"
+
+	^'Get-',self powerShellName, ' -ListAvailable -Name "{1}" | select-object Name, Version, Description, Path, ModuleType | ConvertTo-JSON'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> description [
 
 	^ description
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> description: anObject [
 
 	description := anObject
 ]
 
-{ #category : #'private - initialization' }
+{ #category : 'private - initialization' }
 PSModule >> initFromDictionary: aDictionary [
 	"Initializes the receiver from the given dictionary"
 
@@ -53,61 +64,55 @@ PSModule >> initFromDictionary: aDictionary [
 		moduleType: (aDictionary at: #ModuleType ifAbsent: 0)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PSModule >> isBinary [
 
 	^ self moduleType = Binary
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PSModule >> isManifest [
 
 	^ self moduleType = Manifest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PSModule >> isScript [
 
 	^ self moduleType = Script
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> moduleType [
 
 	^ moduleType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> moduleType: anObject [
 
 	moduleType := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> path [
 
 	^ path
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> path: anObject [
 
 	path := anObject
 ]
 
-{ #category : #printing }
-PSModule >> printOn: aStream [
-
-	aStream nextPutAll: self name asString
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> version [
 
 	^ version
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PSModule >> version: anObject [
 
 	version := anObject

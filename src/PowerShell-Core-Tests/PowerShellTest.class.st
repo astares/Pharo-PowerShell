@@ -1,16 +1,18 @@
 Class {
-	#name : #PowerShellTest,
-	#superclass : #TestCase,
-	#category : 'PowerShell-Core-Tests-Base'
+	#name : 'PowerShellTest',
+	#superclass : 'TestCase',
+	#category : 'PowerShell-Core-Tests-Base',
+	#package : 'PowerShell-Core-Tests',
+	#tag : 'Base'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 PowerShellTest >> testAllInstalledModules [
 
 	self assert: PowerShell allInstalledModules notEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PowerShellTest >> testEdition [
 
 	| editions |
@@ -19,7 +21,7 @@ PowerShellTest >> testEdition [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PowerShellTest >> testIsAvailable [
 
 	self assert: PowerShell isAvailable

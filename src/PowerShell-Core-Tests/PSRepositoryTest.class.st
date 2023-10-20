@@ -2,15 +2,17 @@
 A PSRepositoryTest is a test class for testing the behavior of PSRepository
 "
 Class {
-	#name : #PSRepositoryTest,
-	#superclass : #TestCase,
+	#name : 'PSRepositoryTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'repository'
 	],
-	#category : 'PowerShell-Core-Tests-Model'
+	#category : 'PowerShell-Core-Tests-Model',
+	#package : 'PowerShell-Core-Tests',
+	#tag : 'Model'
 }
 
-{ #category : #data }
+{ #category : 'data' }
 PSRepositoryTest >> sampleJSONString [
 
 	^ '{
@@ -27,14 +29,14 @@ PSRepositoryTest >> sampleJSONString [
 }'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 PSRepositoryTest >> setUp [
 
 	super setUp.
 	repository := PSRepository fromJSON: self sampleJSONString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSRepositoryTest >> testFromJSONString [
 
 	self
@@ -49,8 +51,14 @@ PSRepositoryTest >> testFromJSONString [
 		assert: repository scriptPublishLocation equals: 'https://www.powershellgallery.com/api/v2/package/'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 PSRepositoryTest >> testPowerShellName [
 
 	self assert: PSRepository powerShellName equals: 'PSRepository'
+]
+
+{ #category : 'tests' }
+PSRepositoryTest >> testPrintString [
+
+	self assert: repository printString equals: 'PSGallery'
 ]

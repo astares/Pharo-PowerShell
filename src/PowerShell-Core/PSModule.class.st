@@ -7,7 +7,11 @@ Class {
 	#instVars : [
 		'version',
 		'description',
-		'path'
+		'path',
+		'moduleType'
+	],
+	#pools : [
+		'PSModuleType'
 	],
 	#category : #'PowerShell-Core-Model'
 }
@@ -45,7 +49,38 @@ PSModule >> initFromDictionary: aDictionary [
 		name: (aDictionary at: #Name ifAbsent: '');
 		version: (PSVersion fromDictionary: (aDictionary at: #Version ifAbsent: Dictionary new));
 		description: (aDictionary at: #Description ifAbsent: '');
-		path: (aDictionary at: #Path ifAbsent: '')
+		path: (aDictionary at: #Path ifAbsent: '');
+		moduleType: (aDictionary at: #ModuleType ifAbsent: 0)
+]
+
+{ #category : #testing }
+PSModule >> isBinary [
+
+	^ self moduleType = Binary
+]
+
+{ #category : #testing }
+PSModule >> isManifest [
+
+	^ self moduleType = Manifest
+]
+
+{ #category : #testing }
+PSModule >> isScript [
+
+	^ self moduleType = Script
+]
+
+{ #category : #accessing }
+PSModule >> moduleType [
+
+	^ moduleType
+]
+
+{ #category : #accessing }
+PSModule >> moduleType: anObject [
+
+	moduleType := anObject
 ]
 
 { #category : #accessing }

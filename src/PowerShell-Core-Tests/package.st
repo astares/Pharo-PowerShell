@@ -1,1 +1,1 @@
-Package { #name : 'PowerShell-Core-Tests' }
+Package { #name : #'PowerShell-Core-Tests' }

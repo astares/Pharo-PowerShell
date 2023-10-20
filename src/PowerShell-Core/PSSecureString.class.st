@@ -1,3 +1,6 @@
+"
+A secure string
+"
 Class {
 	#name : #PSSecureString,
 	#superclass : #Object,
@@ -7,5 +10,5 @@ Class {
 { #category : #accessing }
 PSSecureString class >> getSecureStringForPassword: aPassword [
 
-	^LibC resultOfCommand: 'powershell -c " ''', aPassword,''' | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString"'
+	^ PowerShell runCommand: '''', aPassword,''' | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString'
 ]

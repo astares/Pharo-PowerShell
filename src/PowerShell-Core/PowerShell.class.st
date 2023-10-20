@@ -83,13 +83,41 @@ PowerShell class >> installOnUbuntuLinux [
 
 { #category : #testing }
 PowerShell class >> isAvailable [
-	self shouldBeImplemented
+
+	^ self isInstalled 
 ]
 
 { #category : #testing }
 PowerShell class >> isInstalled [
-	Smalltalk os isUbuntu
+
+	Smalltalk os isWindows 
+		ifTrue: [ ^(LibC resultOfCommand: 'where powershell') notEmpty ].
+
+	Smalltalk os isUnix
 		ifTrue: [ ^(LibC resultOfCommand: 'pwsh -v') includesSubstring: 'PowerShell' ].
+
+	"Need to be implemented for other platforms"
+	self shouldBeImplemented
+]
+
+{ #category : #'accessing - runtime' }
+PowerShell class >> powershellExecutableName [
+	<script: 'self powershellExecutableName inspect'>
+	
+	^ Smalltalk os isWindows 
+			ifTrue: [ ^ 'powershell' ]
+			ifFalse:  [ 'pwsh' ]
+]
+
+{ #category : #'accessing - runtime' }
+PowerShell class >> powershellExecutablePath [
+	<script: 'self powershellExecutablePath inspect'>
+	
+	Smalltalk os isWindows 
+		ifTrue: [ ^LibC resultOfCommand: 'where ', self powershellExecutableName ].
+
+	Smalltalk os isUnix
+		ifTrue: [ ^LibC resultOfCommand: 'which pwsh', self powershellExecutableName ].
 
 	"Need to be implemented for other platforms"
 	self shouldBeImplemented
@@ -115,8 +143,10 @@ PowerShell class >> runGnomeTerminalCommand: terminalCommandString [
 	LibC system: cmd
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - runtime' }
 PowerShell class >> version [
+	"Return the version of PowerShell runtime"
+	<script: 'self version inspect'>
 	
 	| jsonString |
 	jsonString := self runCommand: '$PSVersionTable.PSVersion | ConvertTo-Json'.

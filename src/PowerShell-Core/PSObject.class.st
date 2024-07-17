@@ -2,12 +2,14 @@
 Abstract superclass for PowerShell objects
 "
 Class {
-	#name : #PSObject,
-	#superclass : #Object,
-	#category : 'PowerShell-Core-Model'
+	#name : 'PSObject',
+	#superclass : 'Object',
+	#category : 'PowerShell-Core-Model',
+	#package : 'PowerShell-Core',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PSObject class >> fromDictionary: aDictionary [
 
 	^ self new
@@ -15,19 +17,19 @@ PSObject class >> fromDictionary: aDictionary [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PSObject class >> fromJSON: aString [
 
 	^ self fromDictionary: (STON fromString: aString)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PSObject class >> isAbstract [
 
 	^ self == PSObject
 ]
 
-{ #category : #'private - initialization' }
+{ #category : 'private - initialization' }
 PSObject >> initFromDictionary: aDictionary [
 	"Initializes the receiver from the given dictionary"
 

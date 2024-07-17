@@ -151,7 +151,7 @@ PowerShell class >> isAvailable [
 { #category : 'testing' }
 PowerShell class >> isInstalled [
 
-	Smalltalk os isWindows 
+	Smalltalk os isWindows
 		ifTrue: [ ^(LibC resultOfCommand: 'where powershell') notEmpty ].
 
 	Smalltalk os isUnix
